@@ -76,17 +76,29 @@
         </div>
       </div>
     </div>
-   
    <script>
   const addBtn = document.getElementById('add-todo');
   const input = document.getElementById('input-todo');
   const container = document.getElementById('todo-container');
 
+  function loadTodos() {
+    const savedTodos = localStorage.getItem('todos');
+    if (savedTodos) {
+      container.innerHTML = savedTodos;
+    }
+  }
+
+  function saveTodos() {
+    localStorage.setItem('todos', container.innerHTML);
+  }
+
+  // delete todo
   container.addEventListener('click', function(e) {
     if (e.target.classList.contains('delete')) {
-      const todoItem = e.target.closest('.todo');
-      if (todoItem) {
-        todoItem.parentElement.remove();
+      const todoWrapper = e.target.closest('.todo').parentElement;
+      if (todoWrapper) {
+        todoWrapper.remove();
+        saveTodos();
       }
     }
   });
@@ -94,7 +106,6 @@
   // Add new todo
   addBtn.addEventListener('click', () => {
     const value = input.value.trim();
-
     if (value === "") {
       alert("Please enter a todo");
       return;
@@ -106,15 +117,16 @@
           <p>${value}</p>
           <div class="actions">
             <input type="checkbox" class="mr-4" />
-            <button class="delete bg-red-600 text-white rounded px-2 py-1">
-              delete
-            </button>
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">delete</button>
           </div>
         </div>
       </div>`;
 
-    input.value = '';   
+    input.value = '';
+    saveTodos();
   });
+
+  loadTodos();
 </script>
   </body>
 </html>
