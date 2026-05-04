@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>to do list app</title>
+    <link rel="stylesheet" href="./output.css"/>
+  </head>
+  <body class="bg-gray-200">
+    <h1 class="text-3xl text-center mt-2">Todo list</h1>
+    <div class="input-container flex justify-center pt-6 mb-8">
+      <input
+        type="text"
+        placeholder="Enter todo"
+        id="input-todo"
+        class="text-2xl pb-1 pl-1 rounded mr-2"
+      />
+      <button
+        id="add-todo"
+        class="bg-blue-500 text-white px-3 py-1 font-bold rounded"
+      >
+        +
+      </button>
+    </div>
+    <div class="container" id="todo-container">
+      <div>
+        <div
+          class="todo bg-white flex mx-8 text-2xl justify-between items-center py-4 px-2 rounded my-2"
+        >
+          <p id="text">Go to hub</p>
+          <div class="actions">
+            <input type="checkbox" class="mr-4" />
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">
+              delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="todo bg-white flex mx-8 text-2xl justify-between items-center py-4 px-2 rounded my-2"
+        >
+          <p>cook</p>
+          <div class="actions">
+            <input type="checkbox" class="mr-4" />
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">
+              delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="todo bg-white flex mx-8 text-2xl justify-between items-center py-4 px-2 rounded my-2"
+        >
+          <p id="text2">Go to shop</p>
+          <div class="actions">
+            <input type="checkbox" class="mr-4" />
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">
+              delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="todo bg-white flex mx-8 text-2xl justify-between items-center py-4 px-2 rounded my-2"
+        >
+          <p>watch football</p>
+          <div class="actions">
+            <input type="checkbox" class="mr-4" />
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">
+              delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+   <script>
+  const addBtn = document.getElementById('add-todo');
+  const input = document.getElementById('input-todo');
+  const container = document.getElementById('todo-container');
+
+  container.addEventListener('click', function(e) {
+    if (e.target.classList.contains('delete')) {
+      const todoItem = e.target.closest('.todo');
+      if (todoItem) {
+        todoItem.parentElement.remove();
+      }
+    }
+  });
+
+  // Add new todo
+  addBtn.addEventListener('click', () => {
+    const value = input.value.trim();
+
+    if (value === "") {
+      alert("Please enter a todo");
+      return;
+    }
+
+    container.innerHTML += `
+      <div>
+        <div class="todo bg-white flex mx-8 text-2xl justify-between items-center py-4 px-2 rounded my-2">
+          <p>${value}</p>
+          <div class="actions">
+            <input type="checkbox" class="mr-4" />
+            <button class="delete bg-red-600 text-white rounded px-2 py-1">
+              delete
+            </button>
+          </div>
+        </div>
+      </div>`;
+
+    input.value = '';   
+  });
+</script>
+  </body>
+</html>
